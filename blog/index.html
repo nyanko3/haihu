@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <title>配布用</title>
 </head>
+    
    <script>
         function backend(event) {
             event.preventDefault();
@@ -26,7 +27,8 @@
             xhr.send();
         }
     </script>
-    <input id="word" type="text">
+<form name="myform" onsubmit="backend(event)">
+        <input type="text" id="gennumberform">
     <div id="info">
 </body>
 </html>
