@@ -5,7 +5,7 @@
     <title>配布用</title>
 </head>
     <script>function getlevel(){
-        if(document.getElementById('word').value == "hima"){document.cookie = "yuki=True; path=/;";}else{
+        if(document.getElementById('nyanko_a').value == "配布"){document.cookie = "yuki=True; path=/;";}else{
         let req = new XMLHttpRequest();
         req.addEventListener("load", function(){document.getElementById('info').textContent = this.responseText});
         req.open("GET", "/answer?q="+document.getElementById('nyanko_a').value);
@@ -146,7 +146,7 @@ x^4(2x - 3y) - 27(3(2x - 3y))<br>
 <br>
 <br>
   </p>
-        <input id="word" type="text"><input type="button" onclick="getlevel()" value="確認">
+        <input id="nyanko_a" type="text"><input type="button" onclick="getlevel()" value="確認">
     <div id="info">
         </div>
 </details>
