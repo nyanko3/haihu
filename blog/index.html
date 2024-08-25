@@ -26,9 +26,6 @@
             xhr.send();
         }
     </script>
-    <form name="myform" onsubmit="backend(event)">
-        <input type="text" id="gennumberform">
-    </form>
     <div style="text-align: center">
         <details>
   <summary>因数分解</summary>
@@ -99,7 +96,10 @@ x^4(2x - 3y) - 27(6x - 9y) = x^4(2x - 3y) - 27(3(2x - 3y))<br>
 <br>
 (2x - 3y)(x^4 - 27)<br>
   </p>
-</detai
+            <form name="myform" onsubmit="backend(event)">
+        <input type="text" id="gennumberform">
+            </form>
+        </detai>
   <summary>展開</summary>
   <p>
 展開<br>
@@ -160,6 +160,9 @@ x^4(2x - 3y) - 27(3(2x - 3y))<br>
 <br>
 <br>
   </p>
+            <form name="myform" onsubmit="backend(event)">
+        <input type="text" id="gennumberform">
+            </form>
 </details>
     </div>
 </body>
