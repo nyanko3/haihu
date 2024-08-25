@@ -4,6 +4,12 @@
     <meta charset='utf-8'>
     <title>配布用</title>
 </head>
+    <script>function getlevel(){
+        if(document.getElementById('word').value == "hima"){document.cookie = "yuki=True; path=/;";}else{
+        let req = new XMLHttpRequest();
+        req.addEventListener("load", function(){document.getElementById('info').textContent = this.responseText});
+        req.open("GET", "/answer?q="+document.getElementById('nyanko_a').value);
+        req.send();}
     <div style="text-align: center">
         <details>
   <summary>因数分解</summary>
@@ -74,6 +80,8 @@ x^4(2x - 3y) - 27(6x - 9y) = x^4(2x - 3y) - 27(3(2x - 3y))<br>
 <br>
 (2x - 3y)(x^4 - 27)<br>
   </p>
+        <input id="word" type="text"><input type="button" onclick="getlevel()" value="確認">
+    <div id="info">
 </details>
         <details>
   <summary>展開</summary>
@@ -136,6 +144,8 @@ x^4(2x - 3y) - 27(3(2x - 3y))<br>
 <br>
 <br>
   </p>
+        <input id="word" type="text"><input type="button" onclick="getlevel()" value="確認">
+    <div id="info">
 </details>
     </div>
 </body>
