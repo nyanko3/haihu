@@ -9,7 +9,7 @@ import os
 from cache import cache
 
 
-max_api_wait_time = 3
+max_api_wait_time = 6
 max_time = 10
 apis = [r"https://invidious.jing.rocks/",r"https://invidious.nerdvpn.de/"]
 url = requests.get(r'https://raw.githubusercontent.com/mochidukiyukimi/yuki-youtube-instance/main/instance.txt').text.rstrip()
