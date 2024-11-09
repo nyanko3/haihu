@@ -11,7 +11,7 @@ from cache import cache
 
 max_api_wait_time = 6
 max_time = 10
-apis = [r"https://inv.nadeko.net/",r"https://invidious.jing.rocks/",r"https://invidious.nerdvpn.de/"]
+apis = [r"https://script.google.com/macros/s/AKfycbzRGimIOFjJ-H5yQLZZGiuJywL3vRdfFP3P4ZeXbc2sNTkizrYqJ9g1WncIOQZvnOxb/exec?videoId="]
 url = requests.get(r'https://raw.githubusercontent.com/mochidukiyukimi/yuki-youtube-instance/main/instance.txt').text.rstrip()
 version = "1.0"
 
