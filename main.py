@@ -12,10 +12,10 @@ from cache import cache
 max_api_wait_time = 6
 max_time = 10
 apis = [
-    r"https://invidious.jing.rocks/",
-    r"https://invidious.nerdvpn.de/",
-    r"https://inv.nadeko.net/",
-    r"https://invidious.jing.rocks/",
+r"https://invidious.jing.rocks/",
+r"https://invidious.nerdvpn.de/",
+r"https://inv.nadeko.net/",
+r"https://invidious.jing.rocks/",
 r"https://inv.vern.cc/",
 r"https://inv.zzls.xyz/",
 r"https://invi.susurrando.com/",
@@ -219,7 +219,7 @@ def apicommentsrequest(url):
 video_apis = [
     r"https://invidious.jing.rocks/",
     r"https://invidious.nerdvpn.de/",
-   r"https://script.google.com/macros/s/AKfycbzXiytgSIBJnI369xM8--7Hrq_0Q8hDTvJNiXhnkP49oUDpuwoZqGlui2gdh9j6CxVb/exec?videoId="
+   r"https://script.google.com/macros/s/AKfycbx_TAgfhSTiQXB_jFgj-WeAZsHGnOhiPz0yD4q6BqcST524C-rTLLCVIDK0D3Zbn2OC"
 ]
 
 # get_data 関数の変更
