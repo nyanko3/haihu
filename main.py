@@ -41,7 +41,7 @@ def getRandomUserAgent():
 
 class InvidiousAPI:
     def __init__(self):
-        self.all = ast.literal_eval(requests.get('https://raw.githubusercontent.com/LunaKamituki/yukiyoutube-inv-instances/refs/heads/main/main.txt', headers=getRandomUserAgent(), timeout=(1.0, 0.5)).text)
+        self.all = ast.literal_eval(requests.get('https://raw.githubusercontent.com/nyanko3/invidious/refs/heads/main/instances.txt', headers=getRandomUserAgent(), timeout=(1.0, 0.5)).text)
         
         self.video = self.all['video']
         self.playlist = self.all['playlist']
@@ -306,10 +306,8 @@ from typing import Union
 
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
-app.mount("/js", StaticFiles(directory="./statics/js"), name="static")
 app.mount("/css", StaticFiles(directory="./statics/css"), name="static")
-app.mount("/img", StaticFiles(directory="./statics/img"), name="static")
-app.mount("/genesis", StaticFiles(directory="./blog", html=True), name="static")
+app.mount("/nyanko_a", StaticFiles(directory="./blog", html=True), name="static")
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 from fastapi.templating import Jinja2Templates
@@ -323,7 +321,7 @@ def home(response: Response, request: Request, yuki: Union[str] = Cookie(None)):
         response.set_cookie("yuki", "True", max_age=60 * 60 * 24 * 7)
         return template("home.html", {"request": request})
     print(checkCookie(yuki))
-    return redirect("/genesis")
+    return redirect("/nyanko_a")
 
 
 @app.get('/watch', response_class=HTMLResponse)
@@ -424,44 +422,6 @@ def suggest(keyword:str):
 @cache(seconds=120)
 def getSource(name):
     return requests.get(f'https://raw.githubusercontent.com/LunaKamituki/yuki-source/refs/heads/main/{name}.html', headers=getRandomUserAgent()).text
-
-@app.get("/bbs", response_class=HTMLResponse)
-def bbs(request: Request, name: Union[str, None] = "", seed:Union[str, None]="", channel:Union[str, None]="main", verify:Union[str, None]="false", yuki: Union[str] = Cookie(None)):
-    if not(checkCookie(yuki)):
-        return redirect("/")
-    res = HTMLResponse(no_robot_meta_tag + requests.get(f"{url}bbs?name={urllib.parse.quote(name)}&seed={urllib.parse.quote(seed)}&channel={urllib.parse.quote(channel)}&verify={urllib.parse.quote(verify)}", cookies={"yuki":"True"}).text.replace('AutoLink(xhr.responseText);', 'urlConvertToLink(xhr.responseText);') + getSource('bbs'))
-    return res
-
-@cache(seconds=5)
-def getCachedBBSAPI(verify, channel):
-    return requests.get(f"{url}bbs/api?t={urllib.parse.quote(str(int(time.time()*1000)))}&verify={urllib.parse.quote(verify)}&channel={urllib.parse.quote(channel)}", cookies={"yuki":"True"}).text
-
-@app.get("/bbs/api", response_class=HTMLResponse)
-def bbsAPI(request: Request, t: str, channel:Union[str, None]="main", verify: Union[str, None] = "false"):
-    return getCachedBBSAPI(verify, channel)
-
-@app.get("/bbs/result")
-def write_bbs(request: Request, name: str = "", message: str = "", seed:Union[str, None] = "", channel:Union[str, None]="main", verify:Union[str, None]="false", yuki: Union[str] = Cookie(None)):
-    if not(checkCookie(yuki)):
-        return redirect("/")
-    if 'Google-Apps-Script' in str(request.scope["headers"][1][1]):
-        raise UnallowedBot("GASのBotは許可されていません")
-    
-  t = requests.get(f"{url}bbs/result?name={urllib.parse.quote(name)}&message={urllib.parse.quote(message)}&seed={urllib.parse.quote(seed)}&channel={urllib.parse.quote(channel)}&verify={urllib.parse.quote(verify)}&info={urllib.parse.quote(getInfo(request))}&serververify={getVerifyCode()}", cookies={"yuki":"True"}, allow_redirects=False)
-    if t.status_code != 307:
-        return HTMLResponse(no_robot_meta_tag + t.text.replace('AutoLink(xhr.responseText);', 'urlConvertToLink(xhr.responseText);') + getSource('bbs'))
-        
-    return redirect(f"/bbs?name={urllib.parse.quote(name)}&seed={urllib.parse.quote(seed)}&channel={urllib.parse.quote(channel)}&verify={urllib.parse.quote(verify)}")
-
-@cache(seconds=120)
-def getCachedBBSHow():
-    return requests.get(f"{url}bbs/how").text
-
-@app.get("/bbs/how", response_class=PlainTextResponse)
-def view_commonds(request: Request, yuki: Union[str] = Cookie(None)):
-    if not(checkCookie(yuki)):
-        return redirect("/")
-    return getCachedBBSHow()
 
 
 
