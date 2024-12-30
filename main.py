@@ -41,14 +41,14 @@ def getRandomUserAgent():
 
 class InvidiousAPI:
     def __init__(self):
-        self.videos = ast.literal_eval(requests.get('https://raw.githubusercontent.com/nyanko3/invidious/refs/heads/main/instances.txt', headers=header, timeout=(1.0, 0.5)).text)
+        self.videos = ast.literal_eval(requests.get('https://raw.githubusercontent.com/nyanko3/invidious/refs/heads/main/instances.txt', headers=getRandomUserAgent(), timeout=(1.0, 0.5)).text)
 
         self.channels = []
         self.comments = []
 
         [[self.channels.append(api), self.comments.append(api)] for api in self.videos]
 
-        self.checkVideo = False
+        self.check_Video = False
 
     def info(self):
         return {
